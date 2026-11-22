@@ -45,6 +45,7 @@
   .mini-row, .app, .scene h3 { word-break: keep-all; }
   .wrap { max-width: 560px; margin: 0 auto; padding: 0 24px; }
   section { padding: 72px 0; }
+  main section:not(.hero) { padding-top: 0; }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 13px; color: var(--sub); letter-spacing: 0.08em;
@@ -219,11 +220,6 @@
   .plan li { padding: 10px 0 10px 28px; position: relative; font-size: 15px; border-top: 1px solid rgba(29,29,31,0.08); }
   .plan li::before { content: ""; position: absolute; left: 2px; top: 18px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); }
   .plan .note { margin-top: 16px; }
-  table.compare { width: 100%; border-collapse: collapse; margin-top: 32px; font-size: 14px; background: var(--white); border-radius: var(--r-m); overflow: hidden; border: 1px solid var(--line); border-style: hidden; box-shadow: 0 0 0 1px var(--line); }
-  .compare th, .compare td { padding: 14px 12px; text-align: center; border-bottom: 1px solid var(--line); }
-  .compare th { font-weight: 500; background: var(--bg); }
-  .compare td:first-child, .compare th:first-child { text-align: left; padding-left: 20px; }
-  .compare tr:last-child td { border-bottom: none; }
 
   /* maker */
   .maker { background: var(--sky); border-radius: var(--r-l); padding: 40px 24px; }
@@ -234,6 +230,8 @@
   .closing-card .mascot { width: 64px; height: 64px; margin: 0 auto 20px; display: block; }
   .closing-card h3 { font-size: 20px; margin-bottom: 12px; }
   .closing-card p { font-size: 15px; }
+  .closing-card .closing-link { margin-top: 16px; }
+  .closing-card .closing-link a { color: var(--ink); font-weight: 500; text-underline-offset: 4px; }
 
   footer { padding: 48px 0 64px; text-align: center; font-size: 13px; color: var(--sub); }
   footer .logo { justify-content: center; margin-bottom: 12px; color: var(--ink); font-size: 16px; }
@@ -267,7 +265,7 @@
   footer a:hover { text-decoration: underline; }
 
   /* numbers */
-  .calc .v, table.compare { font-variant-numeric: tabular-nums; }
+  .calc .v { font-variant-numeric: tabular-nums; }
 
   /* motion */
   .js .reveal {
@@ -340,6 +338,15 @@
   <!-- 1. ファーストビュー -->
   <section class="hero">
     <div class="wrap">
+      <h1>意志の力に頼らず、<br>スマホを触らない時間を作りませんか</h1>
+      <p>ShieldApp は、よく触ってしまうアプリが決めた時間だけ開かなくなる状態を、あらかじめ設定しておく iPhone アプリです。我慢や気合に頼る必要はありません。</p>
+      <p>アプリが開かない時間は、そのまま自分の時間になります。早く眠ることも、本を読むことも、勉強を進めることも、その時間の使い方は自分で決めることができます。</p>
+
+      <div class="status">
+        <strong>現在、公開の準備をしています。</strong>
+        ShieldApp はまだダウンロードできません。公開まで、もう少しお待ちください。
+      </div>
+
       <div class="hero-visual">
         <div class="phone">
           <div class="screen">
@@ -371,23 +378,13 @@
             </div>
           </div>
         </div>
-        <p class="hero-caption">この時間は、SNS と動画アプリがブロック中です。</p>
-        <p class="mock-label">画面はイメージです</p>
-      </div>
-
-      <h1>意志の力に頼らず、<br>スマホを触らない時間を作りませんか</h1>
-      <p>ShieldApp は、よく触ってしまうアプリが決めた時間だけ開かなくなる状態を、あらかじめ設定しておく iPhone アプリです。我慢や気合に頼る必要はありません。</p>
-      <p>アプリが開かない時間は、そのまま自分の時間になります。早く眠ることも、本を読むことも、勉強を進めることも、その時間の使い方は自分で決めることができます。</p>
-
-      <div class="status">
-        <strong>現在、公開の準備をしています。</strong>
-        ShieldApp はまだダウンロードできません。公開まで、もう少しお待ちください。
+        <p class="hero-caption">この時間は、SNS と動画アプリがブロック中です（画面はイメージです）。</p>
       </div>
     </div>
   </section>
 
   <!-- 2. 悩み -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="eyebrow">こんな方に</div>
       <h2>「触らないようにしよう」と思っても、つい開いてしまいます</h2>
@@ -401,7 +398,7 @@
   </section>
 
   <!-- 3. 場面 -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="eyebrow">使い方の例</div>
       <h2>アプリが開かない時間帯が、自分の時間になります</h2>
@@ -434,7 +431,7 @@
   </section>
 
   <!-- 4. 時間の計算 -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="eyebrow">時間の計算</div>
       <h2>1日1時間でも、続けるとこれだけの時間になります</h2>
@@ -451,7 +448,7 @@
   </section>
 
   <!-- 5. 使い方 -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="eyebrow">使い方</div>
       <h2>始めるために必要なのは、三つ決めて設定するだけです</h2>
@@ -466,7 +463,7 @@
   </section>
 
   <!-- 6. 主な機能 -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="eyebrow">主な機能</div>
       <h2>決めた時間にも今すぐにもアプリを止めて、作った時間を記録できます</h2>
@@ -555,7 +552,7 @@
   </section>
 
   <!-- 7. そのほかの機能 -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="eyebrow">そのほかの機能</div>
       <h2>アプリを止めている間も、必要な連絡や急な用事に対応できます</h2>
@@ -603,7 +600,7 @@
   </section>
 
   <!-- 8. 料金 -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="eyebrow">料金</div>
       <h2>まずは Free プランから始めることができます</h2>
@@ -633,24 +630,11 @@
           <p class="note">※ 価格は公開時点の予定です。</p>
         </div>
       </div>
-
-      <table class="compare">
-        <thead><tr><th>項目</th><th>Free</th><th>Pro</th></tr></thead>
-        <tbody>
-          <tr><td>予定ブロック</td><td>2件</td><td>最大20件</td></tr>
-          <tr><td>アプリセットの保存</td><td>1件</td><td>10件</td></tr>
-          <tr><td>反省文での解除</td><td>週1回</td><td>週3回</td></tr>
-          <tr><td>記録の CSV 書き出し</td><td>―</td><td>○</td></tr>
-          <tr><td>過去の週・月ごとの記録</td><td>―</td><td>○</td></tr>
-          <tr><td>週のふりかえりコメント</td><td>―</td><td>○</td></tr>
-          <tr><td>無料体験（年額プラン）</td><td>―</td><td>7日間</td></tr>
-        </tbody>
-      </table>
     </div>
   </section>
 
   <!-- 9. 作っている人 -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="maker">
         <div class="eyebrow">作っている人</div>
@@ -661,12 +645,13 @@
   </section>
 
   <!-- 10. 締め -->
-  <section style="padding-top: 0;">
+  <section>
     <div class="wrap">
       <div class="closing-card">
         <svg class="mascot" aria-hidden="true"><use href="#moon"/></svg>
         <h3>まずは1件だけ設定して、自分の時間を作りませんか</h3>
-        <p>ShieldApp は公開準備中です。まだダウンロードできません。<br>公開まで、もう少しお待ちください。</p>
+        <p>公開まで、もう少しお待ちください。</p>
+        <p class="closing-link">対応機種や使い方の質問は <a href="support.html">サポートページ</a> にまとめています。</p>
       </div>
     </div>
   </section>
@@ -677,7 +662,7 @@
   document.documentElement.classList.add('js');
   (function () {
     var targets = document.querySelectorAll(
-      'h2, .lead, .status, .worries li, .scene, .calc, .steps li, .feature, .extra, .plan, table.compare, .maker, .closing-card'
+      'h2, .lead, .status, .worries li, .scene, .calc, .steps li, .feature, .extra, .plan, .maker, .closing-card'
     );
     targets.forEach(function (el, i) {
       el.classList.add('reveal');
