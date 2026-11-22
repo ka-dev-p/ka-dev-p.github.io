@@ -1,323 +1,625 @@
 <!DOCTYPE html>
-<html lang="ja" class="scroll-smooth">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="デジタルデトックスでスマホから離れ、より有意義な時間を過ごすアプリ。">
-    <title>detox - デジタルデトックスアプリ</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- AOS アニメーションライブラリ -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- フォント -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                        secondary: {
-                            50: '#fdf4ff',
-                            100: '#fae8ff',
-                            200: '#f5d0fe',
-                            300: '#f0abfc',
-                            400: '#e879f9',
-                            500: '#d946ef',
-                            600: '#c026d3',
-                            700: '#a21caf',
-                            800: '#86198f',
-                            900: '#701a75',
-                        },
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #0ea5e9, #d946ef);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, #0ea5e9, #d946ef);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShieldApp｜よく触ってしまうアプリを、決めた時間だけブロックする iPhone アプリ</title>
+<meta name="description" content="ShieldApp は、よく触ってしまうアプリを決めた時間だけブロックする iPhone アプリです。意志の力に頼らず、アプリが開かない時間をあらかじめ設定しておくことで、自分の時間を作ります。現在、公開の準備をしています。">
+<meta property="og:title" content="ShieldApp｜よく触ってしまうアプリを、決めた時間だけブロックする iPhone アプリ">
+<meta property="og:description" content="決めた時間だけアプリが開かない状態を、あらかじめ設定しておく iPhone アプリです。現在、公開の準備をしています。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ka-dev-p.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBFBF8;
+    --ink: #1D1D1F;
+    --sub: #5E5E62;
+    --line: #E8E8E2;
+    --mint: #DCEEE8;
+    --lavender: #E2DEF6;
+    --yellow: #F6EBC2;
+    --peach: #FBE3D3;
+    --sky: #DCEBF7;
+    --white: #FFFFFF;
+    --r-l: 32px;
+    --r-m: 24px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+  }
+  h1, h2, h3, strong, b { font-weight: 500; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 72px 0; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--sub); letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .eyebrow::before {
+    content: ""; width: 12px; height: 12px; border-radius: 50%;
+    border: 2.5px solid var(--ink);
+  }
+  h2 { font-size: 24px; line-height: 1.6; margin-bottom: 20px; }
+  h3 { font-size: 18px; line-height: 1.6; }
+  p + p { margin-top: 14px; }
+  .lead { color: var(--sub); }
+  .note { font-size: 13px; color: var(--sub); line-height: 1.8; }
+
+  /* header */
+  header { padding: 24px 0 0; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 500; }
+  .logo svg { width: 28px; height: 28px; }
+  .badge {
+    font-size: 12px; padding: 6px 14px; border-radius: 999px;
+    background: var(--yellow); line-height: 1.4;
+  }
+
+  /* phone mock */
+  .phone {
+    width: 240px; margin: 0 auto; background: var(--ink); border-radius: 38px;
+    padding: 9px;
+  }
+  .phone .screen {
+    background: var(--bg); border-radius: 30px; padding: 22px 16px 20px;
+    min-height: 380px;
+  }
+  .phone .status-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--sub); margin-bottom: 14px; }
+  .phone .date { font-size: 13px; color: var(--sub); }
+  .phone .hello { font-size: 17px; font-weight: 500; margin-bottom: 16px; }
+  .hero-card {
+    background: var(--mint); border-radius: 22px; padding: 18px 14px; text-align: center;
+  }
+  .hero-card .ringwrap { position: relative; width: 128px; height: 128px; margin: 0 auto 8px; }
+  .hero-card .ringwrap svg { width: 100%; height: 100%; }
+  .hero-card .ring-center {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; line-height: 1.35;
+  }
+  .hero-card .ring-center .big { font-size: 19px; font-weight: 500; }
+  .hero-card .ring-center .small { font-size: 10px; color: var(--sub); }
+  .hero-card .cap { font-size: 11px; color: var(--sub); }
+  .mini-row {
+    display: flex; align-items: center; gap: 10px; background: var(--white);
+    border: 1px solid var(--line); border-radius: 16px; padding: 11px 13px; margin-top: 10px;
+    font-size: 12px; text-align: left;
+  }
+  .mini-row .dot { width: 28px; height: 28px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  .mini-row .grow { flex: 1; }
+  .mini-row .sub2 { display: block; font-size: 10px; color: var(--sub); }
+  .mock-label { font-size: 11px; color: var(--sub); text-align: right; margin-top: 8px; }
+
+  /* hero */
+  .hero { padding: 48px 0 64px; }
+  .hero-visual {
+    background: var(--lavender); border-radius: var(--r-l);
+    padding: 36px 24px 28px; margin-bottom: 40px;
+  }
+  .hero-caption { margin-top: 18px; font-size: 14px; text-align: center; }
+  .hero h1 { font-size: 30px; line-height: 1.5; margin-bottom: 24px; }
+  .status {
+    margin-top: 32px; padding: 20px 24px; border-radius: var(--r-m);
+    border: 1.5px solid var(--ink); font-size: 14px; line-height: 1.8;
+  }
+  .status strong { display: block; margin-bottom: 4px; }
+
+  /* worries */
+  .worries { list-style: none; display: grid; gap: 12px; margin-top: 8px; }
+  .worries li {
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--r-m);
+    padding: 18px 22px 18px 52px; position: relative; font-size: 15px;
+  }
+  .worries li::before {
+    content: ""; position: absolute; left: 22px; top: 24px; width: 12px; height: 12px;
+    border-radius: 50%; border: 2px solid var(--ink);
+  }
+
+  /* scenes */
+  .scenes { display: grid; gap: 16px; margin-top: 32px; }
+  .scene { border-radius: var(--r-m); padding: 28px 24px; }
+  .scene .head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .scene .time {
+    font-size: 13px; background: rgba(255,255,255,0.7); padding: 4px 12px; border-radius: 999px; white-space: nowrap;
+  }
+  .scene p { font-size: 15px; }
+
+  /* calc */
+  .calc { background: var(--white); border-radius: var(--r-l); padding: 32px 24px; border: 1px solid var(--line); margin-top: 32px; }
+  .calc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px dashed var(--line); }
+  .calc-row:last-of-type { border-bottom: none; }
+  .calc-row .k { color: var(--sub); font-size: 15px; }
+  .calc-row .v { font-size: 22px; font-weight: 500; }
+  .calc-row .v small { font-size: 14px; font-weight: 400; margin-left: 2px; }
+  .calc .formula { font-size: 13px; color: var(--sub); text-align: right; display: block; line-height: 1.4; }
+  .calc .note { margin-top: 16px; }
+
+  /* steps */
+  .steps { list-style: none; counter-reset: s; margin-top: 32px; display: grid; gap: 12px; }
+  .steps li { counter-increment: s; background: var(--white); border: 1px solid var(--line); border-radius: var(--r-m); padding: 22px 24px 22px 72px; position: relative; font-size: 15px; }
+  .steps li::before {
+    content: counter(s); position: absolute; left: 22px; top: 22px;
+    width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; line-height: 1;
+  }
+  .steps li b { display: block; margin-bottom: 4px; }
+
+  /* features */
+  .feature { border-radius: var(--r-l); padding: 32px 24px; margin-top: 24px; }
+  .feature .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--ink);
+    font-size: 14px; font-weight: 500; margin-bottom: 16px;
+  }
+  .feature h3 { margin-bottom: 12px; }
+  .feature p { font-size: 15px; }
+  .feature .phone { margin-top: 24px; }
+  .days { display: flex; justify-content: center; gap: 5px; margin-bottom: 14px; }
+  .days span {
+    width: 27px; height: 27px; border-radius: 50%; font-size: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--white);
+  }
+  .days span.on { background: var(--ink); color: var(--white); }
+  .dial { position: relative; width: 168px; height: 168px; margin: 0 auto; }
+  .dial svg { width: 100%; height: 100%; }
+  .dial .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4; }
+  .dial .center .big { font-size: 21px; font-weight: 500; }
+  .dial .center .small { font-size: 11px; color: var(--sub); }
+  .apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .app { border-radius: 16px; padding: 12px 6px; text-align: center; font-size: 12px; position: relative; }
+  .app i { display: block; width: 28px; height: 28px; border-radius: 9px; margin: 0 auto 6px; background: var(--white); }
+  .app.sel { outline: 2px solid var(--ink); outline-offset: -2px; }
+  .chips { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .chips span { font-size: 12px; padding: 5px 12px; border-radius: 999px; background: var(--white); }
+  .chips span.on { background: var(--ink); color: var(--white); }
+  .start { display: block; text-align: center; background: var(--ink); color: var(--white); border-radius: 999px; padding: 11px; font-size: 14px; }
+  .bars { display: flex; align-items: flex-end; justify-content: space-between; height: 104px; gap: 8px; padding: 0 2px; }
+  .bars div { flex: 1; background: var(--ink); border-radius: 7px 7px 4px 4px; }
+  .bars-x { display: flex; justify-content: space-between; gap: 8px; padding: 8px 2px 0; font-size: 11px; color: var(--sub); }
+  .bars-x span { flex: 1; text-align: center; }
+  .seg { display: flex; background: var(--white); border-radius: 999px; padding: 4px; margin-bottom: 18px; font-size: 12px; }
+  .seg span { flex: 1; text-align: center; padding: 4px 0; border-radius: 999px; }
+  .seg span.on { background: var(--bg); border: 1px solid var(--line); }
+  .total-box { background: var(--mint); border-radius: 16px; padding: 14px; text-align: center; margin-bottom: 16px; }
+  .total-box .big { font-size: 22px; font-weight: 500; }
+  .total-box .small { font-size: 11px; color: var(--sub); display: block; }
+
+  /* extras */
+  .extras { display: grid; gap: 16px; margin-top: 32px; }
+  .extra { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-m); padding: 24px; display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+  .extra .icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .extra .icon svg { width: 22px; height: 22px; }
+  .extra h3 { font-size: 16px; margin-bottom: 6px; }
+  .extra p { font-size: 14px; color: var(--sub); }
+
+  /* pricing */
+  .plans { display: grid; gap: 16px; margin-top: 32px; }
+  .plan { border-radius: var(--r-l); padding: 32px 24px; }
+  .plan.free { background: var(--mint); }
+  .plan.pro { background: var(--white); border: 2px solid var(--ink); }
+  .plan .name { font-size: 20px; font-weight: 500; }
+  .plan .price { margin: 8px 0 20px; font-size: 15px; }
+  .plan .price b { font-size: 26px; }
+  .plan ul { list-style: none; }
+  .plan li { padding: 10px 0 10px 28px; position: relative; font-size: 15px; border-top: 1px solid rgba(29,29,31,0.08); }
+  .plan li::before { content: ""; position: absolute; left: 2px; top: 18px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); }
+  .plan .note { margin-top: 16px; }
+  table.compare { width: 100%; border-collapse: collapse; margin-top: 32px; font-size: 14px; background: var(--white); border-radius: var(--r-m); overflow: hidden; border: 1px solid var(--line); border-style: hidden; box-shadow: 0 0 0 1px var(--line); }
+  .compare th, .compare td { padding: 14px 12px; text-align: center; border-bottom: 1px solid var(--line); }
+  .compare th { font-weight: 500; background: var(--bg); }
+  .compare td:first-child, .compare th:first-child { text-align: left; padding-left: 20px; }
+  .compare tr:last-child td { border-bottom: none; }
+
+  /* maker */
+  .maker { background: var(--sky); border-radius: var(--r-l); padding: 40px 24px; }
+  .maker p { font-size: 15px; }
+
+  /* closing */
+  .closing-card { margin-top: 8px; background: var(--peach); border-radius: var(--r-l); padding: 40px 24px; text-align: center; }
+  .closing-card .mascot { width: 64px; height: 64px; margin: 0 auto 20px; display: block; }
+  .closing-card h3 { font-size: 20px; margin-bottom: 12px; }
+  .closing-card p { font-size: 15px; }
+
+  footer { padding: 48px 0 64px; text-align: center; font-size: 13px; color: var(--sub); }
+  footer .logo { justify-content: center; margin-bottom: 12px; color: var(--ink); font-size: 16px; }
+  footer .logo svg { width: 22px; height: 22px; }
+
+  @media (min-width: 768px) {
+    .wrap { max-width: 640px; }
+    section { padding: 96px 0; }
+    .hero h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    .scenes { grid-template-columns: 1fr 1fr; }
+    .scene:first-child { grid-column: 1 / -1; }
+    .plans { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-    <nav class="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 shadow-sm">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold gradient-text">detox</a>
-            <div class="flex items-center gap-6">
-                <a href="#features" class="hidden md:block hover:text-primary-600 dark:hover:text-primary-400 transition">機能</a>
-                <a href="#examples" class="hidden md:block hover:text-primary-600 dark:hover:text-primary-400 transition">活用例</a>
-                <a href="#download" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition duration-300 shadow-md hover:shadow-lg">ダウンロード</a>
-                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </button>
+<body>
+
+<!-- 共有パーツ：月のマスコット -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="moon-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="66" cy="38" r="32" fill="#000"/>
+    </mask>
+    <symbol id="moon" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="#1D1D1F" mask="url(#moon-cut)"/>
+      <circle cx="23" cy="54" r="3.5" fill="#fff"/>
+      <circle cx="34" cy="67" r="3.5" fill="#fff"/>
+    </symbol>
+    <symbol id="ring-logo" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="11" fill="none" stroke="#1D1D1F" stroke-width="5"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><svg><use href="#ring-logo"/></svg>ShieldApp</div>
+    <span class="badge">公開準備中</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. ファーストビュー -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-visual">
+        <div class="phone">
+          <div class="screen">
+            <div class="status-row"><span>21:40</span><span>ホーム</span></div>
+            <div class="date">11月13日（金）</div>
+            <div class="hello">今日のブロック</div>
+            <div class="hero-card">
+              <div class="ringwrap">
+                <svg viewBox="0 0 128 128" aria-hidden="true">
+                  <circle cx="64" cy="64" r="52" fill="none" stroke="#FFFFFF" stroke-width="13"/>
+                  <circle cx="64" cy="64" r="52" fill="none" stroke="#1D1D1F" stroke-width="13" stroke-linecap="round"
+                    stroke-dasharray="228.7 326.7" transform="rotate(-90 64 64)"/>
+                  <circle cx="14.5" cy="80.1" r="7.5" fill="#A8D8C8" stroke="#1D1D1F" stroke-width="2.5"/>
+                </svg>
+                <div class="ring-center">
+                  <span class="big">1時間24分</span>
+                  <span class="small">目標 2時間</span>
+                </div>
+              </div>
+              <div class="cap">今日は目標の 70% まで進んでいます</div>
             </div>
+            <div class="mini-row">
+              <span class="dot" style="background: var(--lavender);">済</span>
+              <span class="grow">ブロックは正常です<span class="sub2">点検で問題は見つかりませんでした</span></span>
+            </div>
+            <div class="mini-row">
+              <span class="dot" style="background: var(--yellow);">次</span>
+              <span class="grow">23:00 から夜の予定<span class="sub2">SNS・動画をブロックします</span></span>
+            </div>
+          </div>
         </div>
-    </nav>
+        <p class="hero-caption">この時間、SNS と動画アプリはブロック中です。</p>
+        <p class="mock-label">画面はイメージです</p>
+      </div>
 
-    <header class="pt-28 pb-20 px-4 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2" data-aos="fade-right" data-aos-duration="1000">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-                        <span class="gradient-text">デジタル</span>から解放され、<br>
-                        <span class="gradient-text">本当の自由</span>を手に入れる
-                    </h1>
-                    <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8">
-                        スマホを手放し、本当に大切な時間を取り戻しませんか？<br>detoxは、あなたのデジタルデトックスと自己成長をサポートします。
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#download" class="gradient-bg text-white px-6 py-3 rounded-lg text-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
-                            今すぐダウンロード
-                        </a>
-                        <a href="#features" class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-6 py-3 rounded-lg text-center shadow-md hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
-                            アプリの特徴を見る
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                    <div class="relative">
-                        <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl blur opacity-30 dark:opacity-40 animate-pulse"></div>
-                        <img src="images/timerImg.PNG" alt="デトックスアプリプレビュー" class="relative rounded-xl shadow-2xl w-full max-w-sm mx-auto">
-                    </div>
-                </div>
-            </div>
+      <h1>意志の力に頼らず、<br>スマホを触らない時間を作りませんか</h1>
+      <p>ShieldApp は、よく触ってしまうアプリが決めた時間だけ開かなくなる状態を、あらかじめ設定しておく iPhone アプリです。我慢や気合に頼る必要はありません。</p>
+      <p>アプリが開かない時間は、そのまま自分の時間になります。早く眠ることも、本を読むことも、勉強を進めることもできます。その時間の使い方は、自分で決めてください。</p>
+
+      <div class="status">
+        <strong>現在、公開の準備をしています。</strong>
+        ShieldApp はまだダウンロードできません。公開まで、もう少しお待ちください。
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 悩み -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">こんな方に</div>
+      <h2>「触らない」と決めても、つい開いてしまう</h2>
+      <ul class="worries">
+        <li>寝る前に動画を見始めて、気づくと夜中になっています</li>
+        <li>勉強を始めても、つい SNS を開いてしまいます</li>
+        <li>仕事中にスマホが気になって、作業が止まってしまいます</li>
+        <li>子どもが寝たあとの時間が、SNS を見ているうちに過ぎてしまいます</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. 場面 -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">使い方の例</div>
+      <h2>止めた時間の、使い方の例</h2>
+      <p class="lead">ブロックする時間帯は、人によって違います。ここでは5つの例を紹介します。</p>
+
+      <div class="scenes">
+        <div class="scene" style="background: var(--lavender);">
+          <div class="head"><h3>夜更かしをやめたい</h3><span class="time">毎日 23:00〜7:00</span></div>
+          <p>寝る前に動画を見続けてしまうときは、夜の時間帯に SNS と動画アプリのブロックを予約しておきます。布団の中で開こうとしてもアプリは開かないため、そのまま電気を消して眠ることができます。</p>
         </div>
-    </header>
-    
-    <main>
-        <section id="problem-solution" class="py-20 px-4">
-            <div class="container mx-auto max-w-3xl text-center">
-                <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">
-                    <span class="gradient-text">スマホに時間を奪われていませんか？</span>
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">
-                    気づけばSNSや通知に時間を浪費し、本当にやりたいことに集中できない... そんな経験はありませんか？ 現代のデジタル環境は、私たちの貴重な時間と集中力を容赦なく奪います。
-                </p>
-                <h3 class="text-2xl font-semibold mb-6" data-aos="fade-up" data-aos-delay="200">
-                    <span class="gradient-text">detox</span>が、その問題を解決します。
-                </h3>
-                <p class="text-lg text-gray-600 dark:text-gray-400" data-aos="fade-up" data-aos-delay="300">
-                    detoxは、計画的なデジタルデトックスをサポートし、あなたが自身の時間をコントロールし、集中力を高め、目標達成へと着実に進むためのツールです。
-                </p>
-            </div>
-        </section>
-
-        <section id="features" class="py-20 px-4 bg-gray-100 dark:bg-gray-800">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-3xl font-bold text-center mb-16" data-aos="fade-up">
-                    <span class="gradient-text">アプリの主要機能</span>
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4 mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-center mb-3">計画的なデトックス時間</h3>
-                        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">スクリーンタイムAPIを活用し、特定の時間帯や期間、スマホの利用をブロック。集中したい時間や休息時間を意図的に作り出せます。</p>
-                        <img src="images/timerImg.PNG" alt="デトックスタイマー画面" class="w-full h-auto rounded-lg mt-4">
-                    </div>
-                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4 mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-center mb-3">デトックス中の活動ログ</h3>
-                        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">デトックス中に何をしたかを簡単に記録。読書、運動、内省など、充実した時間の使い方を意識し、振り返りに役立てます。</p>
-                        <img src="images/quickBlockImg.PNG" alt="活動ログ入力画面" class="w-full h-auto rounded-lg mt-4">
-                    </div>
-                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4 mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-center mb-3">活動をタグで分類</h3>
-                        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">記録した活動に「#読書」「#学習」「#運動」などのタグを付けて分類。どんな活動に時間を費やしているか、傾向を分析できます。</p>
-                    </div>
-                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl" data-aos="fade-up" data-aos-delay="400">
-                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4 mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-center mb-3">日々の成果をカレンダーで</h3>
-                        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">デトックス時間や活動記録をカレンダー形式で視覚化。日々の積み重ねや継続性が「ヒートマップ」のように色で分かり、モチベーション維持に繋がります。</p>
-                        <img src="images/graphImg.PNG" alt="活動カレンダー/グラフ画面" class="w-full h-auto rounded-lg mt-4">
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="concepts" class="py-20 px-4">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-3xl font-bold text-center mb-16" data-aos="fade-up">
-                    <span class="gradient-text">detoxで変わる、あなたの毎日</span>
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="text-4xl mb-4 text-center">⏳</div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">時間をコントロールする</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-center text-sm">受動的なデジタル消費から脱却し、自分の意思で時間をデザイン。本当に価値ある活動に時間を費やせるようになります。</p>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="text-4xl mb-4 text-center">🎯</div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">深い集中を手に入れる</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-center text-sm">デジタルノイズを遮断し、目の前のタスクに没頭できる環境を実現。学習、仕事、創造活動の質を高めます。</p>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="text-4xl mb-4 text-center">📈</div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">行動を可視化し成長する</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-center text-sm">デトックス時間や活動を記録・分析することで、自分の傾向を理解。より良い時間の使い方を見つけ、継続的な自己成長に繋げます。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="outcomes" class="py-20 px-4 bg-gray-100 dark:bg-gray-800">
-            <div class="container mx-auto max-w-3xl text-center">
-                <h2 class="text-3xl font-bold mb-12" data-aos="fade-up">
-                    <span class="gradient-text">detoxを使うことで得られるメリット</span>
-                </h2>
-                <ul class="text-lg text-gray-600 dark:text-gray-400 space-y-4 list-disc list-inside">
-                    <li data-aos="fade-up" data-aos-delay="100">集中力が向上し、生産性がアップします。</li>
-                    <li data-aos="fade-up" data-aos-delay="200">スマホに奪われていた時間を有効に活用できます。</li>
-                    <li data-aos="fade-up" data-aos-delay="300">自分の時間の使い方を深く理解できます。</li>
-                    <li data-aos="fade-up" data-aos-delay="400">デジタルストレスが軽減され、心にゆとりが生まれます。</li>
-                    <li data-aos="fade-up" data-aos-delay="500">読書や運動、大切な人との時間など、充実した活動が増えます。</li>
-                    <li data-aos="fade-up" data-aos-delay="600">日々の小さな成功体験が、自己肯定感を高めます。</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="examples" class="py-20 px-4">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-3xl font-bold text-center mb-16" data-aos="fade-up">
-                    <span class="gradient-text">detoxの活用例</span>
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="text-4xl mb-4 text-center">📚</div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">学習・読書に集中</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-center text-sm">通知を遮断し、資格試験の勉強や読書に没頭。深い集中で効率的にスキルアップを目指せます。</p>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="text-4xl mb-4 text-center">🏃‍♀️</div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">健康的な習慣作り</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-center text-sm">ランニング中やヨガの間はデトックス。運動に集中したり、瞑想で心を整えたり、心身のリフレッシュに。</p>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="text-4xl mb-4 text-center">👨‍👩‍👧‍👦</div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">大切な人との時間</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-center text-sm">家族や友人との食事中、会話中はスマホをオフ。目の前の人との繋がりを大切にし、より豊かなコミュニケーションを。</p>
-                    </div>
-                </div>
-                <p class="text-center text-lg mt-12 text-gray-600 dark:text-gray-400" data-aos="fade-up">
-                    あなたの自由な時間を、detoxでもっと有意義に。
-                </p>
-            </div>
-        </section>
-
-        <section id="download" class="py-20 px-4 bg-gradient-to-br from-primary-600 to-secondary-600 text-white">
-            <div class="container mx-auto max-w-4xl text-center">
-                <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
-                    今すぐdetoxを始めてみませんか？
-                </h2>
-                <p class="text-xl mb-10 opacity-90" data-aos="fade-up" data-aos-delay="100">
-                    デジタルから解放され、集中力を高め、あなたの自己成長を加速させる旅を始めましょう。
-                </p>
-                <a href="https://apps.apple.com" class="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300" data-aos="zoom-in" data-aos-delay="200">
-                    App Storeでダウンロード
-                </a>
-                <div class="mt-10 text-sm opacity-80" data-aos="fade-up" data-aos-delay="300">
-                    <a href="https://ka-dev-p.github.io/privacy-policy.html" class="underline hover:text-white transition">プライバシーポリシー</a> |
-                    <a href="https://ka-dev-p.github.io/terms-of-service.html" class="underline hover:text-white transition">利用規約</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-gray-900 text-gray-400 py-12 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="text-2xl font-bold gradient-text mb-2">detox</div>
-                    <p class="text-sm">デジタルから解放され、本当の自由を手に入れる</p>
-                </div>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-white transition" aria-label="Twitter">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="hover:text-white transition" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                <p>&copy; 2025 detox. All Rights Reserved.</p>
-            </div>
+        <div class="scene" style="background: var(--mint);">
+          <div class="head"><h3>勉強</h3><span class="time">平日 19:00〜21:00</span></div>
+          <p>学校から帰ったあとの2時間を、勉強の時間にします。その2時間は、SNS やゲームのアプリが開きません。我慢しなくても、机に向かう時間を確保できます。</p>
         </div>
-    </footer>
+        <div class="scene" style="background: var(--sky);">
+          <div class="head"><h3>仕事</h3><span class="time">平日 9:00〜12:00</span></div>
+          <p>午前中は、集中したい作業を進める時間にします。連絡だけモードを使用すれば、電話や仕事の連絡に使うアプリは残したまま、ほかのアプリはすべて止まります。</p>
+        </div>
+        <div class="scene" style="background: var(--yellow);">
+          <div class="head"><h3>資格の勉強</h3><span class="time">土日 8:00〜10:00</span></div>
+          <p>週末の朝に2時間ずつ予約しておきます。試験の日まで、毎週同じ時間に勉強を始めることができます。</p>
 
-    <!-- ダークモード切替スクリプト -->
-    <script>
-        document.getElementById('darkModeToggle').addEventListener('click', function() {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
-        });
+        </div>
+        <div class="scene" style="background: var(--peach);">
+          <div class="head"><h3>寝かしつけのあと</h3><span class="time">毎日 21:30〜23:00</span></div>
+          <p>子どもが寝たあとの時間は、自分のための時間です。SNS を止めておくと、画面を眺め続けてしまうことなく、その時間を読書や趣味に使用できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // 保存された設定を読み込む
-        if (localStorage.getItem('darkMode') === 'true' || 
-            (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        }
-    </script>
+  <!-- 4. 時間の計算 -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">時間の計算</div>
+      <h2>1日1時間を続けた場合の計算</h2>
+      <p class="lead">1日に1時間、スマホを触らない時間を作ったとします。その時間を足していくと、次のようになります。</p>
 
-    <!-- AOS アニメーション初期化 -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            once: true,
-            disable: 'mobile'
-        });
-    </script>
+      <div class="calc">
+        <div class="calc-row"><span class="k">1日</span><span class="v">1<small>時間</small></span></div>
+        <div class="calc-row"><span class="k">1週間</span><span><span class="v">7<small>時間</small></span><span class="formula">1時間 × 7日</span></span></div>
+        <div class="calc-row"><span class="k">1か月</span><span><span class="v">30<small>時間</small></span><span class="formula">1時間 × 30日</span></span></div>
+        <div class="calc-row"><span class="k">1年</span><span><span class="v">365<small>時間</small></span><span class="formula">1時間 × 365日</span></span></div>
+        <p class="note">これは単純な掛け算です。実際に使用した時間ではありません。ShieldApp では、自分がブロックした時間が記録に残ります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 使い方 -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">使い方</div>
+      <h2>始めるのは、三つ決めるだけです</h2>
+      <p class="lead">最初から多くの時間をブロックする必要はありません。まずは予定ブロックを1件だけ作ることから始めます。</p>
+
+      <ol class="steps">
+        <li><b>止めるアプリを決める</b>自分がよく触ってしまうアプリを、一つか二つ選択します。</li>
+        <li><b>時間帯を決める</b>たとえば「平日の 23:00〜7:00」のように、まずは一つだけ決めます。</li>
+        <li><b>その時間にやることを決める</b>早く眠る、本を読む、勉強をするなど、空いた時間にすることを一つ決めておきます。</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. 主な機能 -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">主な機能</div>
+      <h2>自分の時間を作るための、3つの機能</h2>
+      <p class="lead">ShieldApp は、iOS の Screen Time の仕組みを使ってアプリをブロックします。</p>
+
+      <div class="feature" style="background: var(--lavender);">
+        <span class="num">1</span>
+        <h3>予定ブロック</h3>
+        <p>曜日と時間帯を決めて、ブロックを予約します。開始と終了の時刻は、円形のダイヤルを回して選択します。</p>
+        <p>毎日の寝る前や平日の勉強の時間など、決まった時間にアプリが開かない状態を作ることができます。</p>
+        <div class="phone">
+          <div class="screen">
+            <div class="status-row"><span>18:20</span><span>予定を編集</span></div>
+            <div class="days">
+              <span class="on">月</span><span class="on">火</span><span class="on">水</span><span class="on">木</span><span class="on">金</span><span>土</span><span>日</span>
+            </div>
+            <div class="dial">
+              <svg viewBox="0 0 200 200" aria-hidden="true">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#F1F1EC" stroke-width="18"/>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#1D1D1F" stroke-width="18"
+                  stroke-dasharray="157.1 345.6" transform="rotate(247.5 100 100)"/>
+                <circle cx="69.4" cy="26.1" r="11" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="3"/>
+                <circle cx="180" cy="100" r="11" fill="#FFFFFF" stroke="#1D1D1F" stroke-width="3"/>
+              </svg>
+              <div class="center">
+                <span class="small">開始</span>
+                <span class="big">22:30</span>
+                <span class="small">終了 6:00</span>
+              </div>
+            </div>
+            <div class="mini-row">
+              <span class="dot" style="background: var(--mint);">対</span>
+              <span class="grow">SNS・動画<span class="sub2">対象のアプリ 6件</span></span>
+            </div>
+          </div>
+        </div>
+        <p class="mock-label">画面はイメージです</p>
+      </div>
+
+      <div class="feature" style="background: var(--mint);">
+        <span class="num">2</span>
+        <h3>クイックブロック</h3>
+        <p>今すぐ集中したいときに使用する機能です。止めるアプリと時間を選択すると、その場でブロックが始まります。</p>
+        <p>コントロールセンターからも開始できるため、アプリを開く手間はかかりません。</p>
+        <div class="phone">
+          <div class="screen">
+            <div class="status-row"><span>15:05</span><span>クイックブロック</span></div>
+            <div class="apps">
+              <div class="app sel" style="background: var(--lavender);"><i></i>SNS</div>
+              <div class="app sel" style="background: var(--peach);"><i></i>動画</div>
+              <div class="app" style="background: var(--sky);"><i></i>ゲーム</div>
+            </div>
+            <div class="chips"><span>15分</span><span class="on">30分</span><span>1時間</span><span>2時間</span></div>
+            <span class="start">ブロックを開始</span>
+            <div class="mini-row">
+              <span class="dot" style="background: var(--yellow);">休</span>
+              <span class="grow">25分ブロック＋5分休憩<span class="sub2">区切りを入れることもできます</span></span>
+            </div>
+          </div>
+        </div>
+        <p class="mock-label">画面はイメージです</p>
+      </div>
+
+      <div class="feature" style="background: var(--yellow);">
+        <span class="num">3</span>
+        <h3>記録とふりかえり</h3>
+        <p>ブロックした時間は、記録に残ります。記録は週や月のグラフで確認できます。</p>
+        <p>自分がどの曜日にどれだけの時間を作ったかが、グラフで分かります。</p>
+        <div class="phone">
+          <div class="screen">
+            <div class="status-row"><span>22:10</span><span>ふりかえり</span></div>
+            <div class="total-box">
+              <span class="small">今週ブロックした時間</span>
+              <span class="big">9時間40分</span>
+            </div>
+            <div class="seg"><span class="on">週</span><span>月</span></div>
+            <div class="bars" aria-hidden="true">
+              <div style="height: 55%"></div><div style="height: 70%"></div><div style="height: 40%"></div><div style="height: 80%"></div><div style="height: 60%"></div><div style="height: 95%"></div><div style="height: 75%"></div>
+            </div>
+            <div class="bars-x"><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span><span>日</span></div>
+          </div>
+        </div>
+        <p class="mock-label">画面はイメージです</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. そのほかの機能 -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">そのほかの機能</div>
+      <h2>ブロック中に困らないための機能</h2>
+      <p class="lead">アプリを止めている間も、必要な連絡は受け取ることができます。急な用事があるときや、設定がずれたときのための仕組みも用意しています。</p>
+
+      <div class="extras">
+        <div class="extra">
+          <div class="icon" style="background: var(--peach);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1D1D1F" stroke-width="2" stroke-linecap="round"><path d="M5 19h14M7 15l8-8 2 2-8 8H7v-2z"/></svg>
+          </div>
+          <div>
+            <h3>反省文での解除</h3>
+            <p>ブロック中にどうしてもアプリを開く必要があるときは、理由を文章で書くと解除することができます。解除できる回数には上限があります。</p>
+          </div>
+        </div>
+        <div class="extra">
+          <div class="icon" style="background: var(--mint);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1D1D1F" stroke-width="2" stroke-linecap="round"><path d="M5 5h14v10H10l-5 4V5z"/></svg>
+          </div>
+          <div>
+            <h3>連絡だけモード</h3>
+            <p>LINE や電話など、自分で選んだアプリだけを残します。それ以外のアプリは、すべて止まります。</p>
+          </div>
+        </div>
+        <div class="extra">
+          <div class="icon" style="background: var(--sky);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1D1D1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          </div>
+          <div>
+            <h3>点検と自動修復</h3>
+            <p>ブロックの設定がずれて効かなくなっていないかを、アプリが点検します。ずれていた場合は、アプリが設定を直します。</p>
+          </div>
+        </div>
+        <div class="extra">
+          <div class="icon" style="background: var(--lavender);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1D1D1F" stroke-width="2" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10 8h4"/></svg>
+          </div>
+          <div>
+            <h3>ウィジェットと Live Activity</h3>
+            <p>ホーム画面とロック画面に、ブロックの残り時間が表示されます。アプリを開かなくても、あと何分かが分かります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 料金 -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="eyebrow">料金</div>
+      <h2>まずは無料のプランから</h2>
+      <p class="lead">ShieldApp には Free と Pro の2つのプランがあります。Free でも、予定ブロックを2件まで作成できます。ブロックの解除はお金では購入できず、Pro で増えるのはブロックの道具と記録の範囲だけです。</p>
+
+      <div class="plans">
+        <div class="plan free">
+          <div class="name">Free</div>
+          <div class="price"><b>無料</b></div>
+          <ul>
+            <li>予定ブロック 2件</li>
+            <li>アプリセットの保存 1件</li>
+            <li>反省文での解除 週1回</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">年額 <b>4,800円</b>（7日間の無料体験つき）<br>3か月 <b>2,000円</b>　月額 <b>800円</b></div>
+          <ul>
+            <li>予定ブロック 最大20件</li>
+            <li>アプリセットの保存 10件</li>
+            <li>反省文での解除 週3回</li>
+            <li>記録の CSV 書き出し</li>
+            <li>過去の週・月ごとの記録</li>
+            <li>週のふりかえりコメント</li>
+          </ul>
+          <p class="note">※ 価格は公開時点の予定です。</p>
+        </div>
+      </div>
+
+      <table class="compare">
+        <thead><tr><th>項目</th><th>Free</th><th>Pro</th></tr></thead>
+        <tbody>
+          <tr><td>予定ブロック</td><td>2件</td><td>最大20件</td></tr>
+          <tr><td>アプリセットの保存</td><td>1件</td><td>10件</td></tr>
+          <tr><td>反省文での解除</td><td>週1回</td><td>週3回</td></tr>
+          <tr><td>記録の CSV 書き出し</td><td>―</td><td>○</td></tr>
+          <tr><td>過去の週・月ごとの記録</td><td>―</td><td>○</td></tr>
+          <tr><td>週のふりかえりコメント</td><td>―</td><td>○</td></tr>
+          <tr><td>無料体験（年額プラン）</td><td>―</td><td>7日間</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9. 作っている人 -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="maker">
+        <div class="eyebrow">作っている人</div>
+        <h2>個人で開発しています</h2>
+        <p>ShieldApp は、個人の開発者が作っているアプリです。現在は、公開に向けて準備を進めています。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. 締め -->
+  <section style="padding-top: 0;">
+    <div class="wrap">
+      <div class="closing-card">
+        <svg class="mascot" aria-hidden="true"><use href="#moon"/></svg>
+        <h3>まずは1件だけ設定して、自分の時間を作りませんか</h3>
+        <p>ShieldApp は公開準備中です。まだダウンロードできません。<br>公開まで、もう少しお待ちください。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="logo"><svg><use href="#ring-logo"/></svg>ShieldApp</div>
+  <p>iPhone 向けアプリ（公開準備中）</p>
+  <p style="margin-top: 16px;">
+    <a href="support.html" style="color: inherit;">サポート</a>　・　
+    <a href="privacy-policy.html" style="color: inherit;">プライバシーポリシー</a>　・　
+    <a href="terms-of-service.html" style="color: inherit;">利用規約</a>
+  </p>
+</footer>
+
 </body>
 </html>
